@@ -1,1 +1,1 @@
-# projet_puissance4
+# POO : premières notions
