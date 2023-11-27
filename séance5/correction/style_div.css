@@ -1,0 +1,14 @@
+div {
+    text-align:center;
+}
+
+div#base {
+    width:600px;
+    height:400px;
+    background-color:#FFCC00;
+    align-content: start;
+}
+
+textarea#ordre {
+    align-content: start;
+}

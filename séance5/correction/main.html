@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Séance 5</title>
+    <script src="Robot.js"></script>
+    <link rel="stylesheet" type="text/css" href="style_div.css">
+
+</head>
+<body>
+<div id="base">
+</div>
+<div id="commande">
+    <textarea id="ordre" rows="4" cols="50">Entrez une commande (puis <enter>) :</textarea>
+</div>
+
+<script>
+    customElements.define("robot-elt", Robot)
+
+    let base = document.getElementById("base")
+    let r = new Robot(base)
+    //deplacer()
+
+    let debut = true
+    document.getElementById("ordre").addEventListener("input", callback)
+
+    function callback (e) {
+        let code
+        if (debut) {
+            code = document.getElementById("ordre").value.toLowerCase();
+            document.getElementById("ordre").value = code.at(code.length - 1)
+            debut = false
+        } else {
+            code = document.getElementById("ordre").value.toLowerCase();
+            if (code.at(code.length - 1) == "\n") {
+                code = code.substring(0, code.length - 1)
+                document.getElementById("ordre").value = ""
+                debut = true
+                eval("r."+code).call(r)
+            }
+        }
+    }
+    function deplacer () {
+        r.droite()
+        if (r.offsetLeft < base.offsetWidth-r.pas) setTimeout(() => {
+            deplacer()
+        }, 1000)
+    }
+</script>
+</body>
+</html>
